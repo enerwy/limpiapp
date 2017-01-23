@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "prueba anita", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "prueba 2 anita", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        System.out.println("ome gonorrea Omeeee!!");
+        System.out.println("depresion absoluta!!");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
