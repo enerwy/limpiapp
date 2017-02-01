@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "co.com.enerwygroup.www.limpiapp"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -17,7 +17,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    productFlavors {
+        // Build variant with minSdk 16 to include Facebook and FirebaseUI libraries.
+        minSdkJellybean {
+            minSdkVersion 16
+        }
+
+        // Build variant with minSdk 14, excludes Facebook and FirebaseUI libraries.
+        minSdkIcs {
+            minSdkVersion 15
+        }
+    }
 }
+
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:25.0.1'
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+repositories {
+    mavenCentral()
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -26,5 +55,26 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
+    compile 'com.google.firebase:firebase-auth:9.8.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
+    compile 'com.google.android.gms:play-services-auth:9.8.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    minSdkJellybeanCompile 'com.firebaseui:firebase-ui-auth:1.0.0'
+    minSdkJellybeanCompile 'com.facebook.android:facebook-android-sdk:4.9.0'
+
+    // Twitter Android SDK (only required for Twitter Login)
+    compile('com.twitter.sdk.android:twitter-core:1.6.6@aar') {
+        transitive = true
+    }
+    compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
+        transitive = true;
+    }
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support.test:runner:0.5'
 }
+
+
+apply plugin: 'com.google.gms.google-services'
